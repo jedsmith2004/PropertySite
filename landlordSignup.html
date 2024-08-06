@@ -10,12 +10,40 @@
     <form action="....." methods="GET">
         <div>
             <label for="Name">Name</label>
-            <input type="text" name = "Name" id ="Name" placeholder="Full Name">
+            <input type="text" name = "Name" id ="Name" placeholder="Full Name" required>
         </div> 
         <div>
-            <label for="Password">Password</label>
-            <input type="password" name = "Password" id ="Password">
+            <label for="Number">Phone number</label>
+            <input type="text" name = "Number" id ="Number" required>
         </div> 
+        <div>
+            <label for="Email">Email</label>
+            <input type="email" name = "Email" id ="Email" placeholder="Exmaple@gmail.com" required>
+        </div> 
+
+        <div>
+            <label for="Password">Password</label>
+            <input type="password" name = "Password" id ="Password" placeholder="Password" required>
+        </div> 
+        <div>
+            Gender
+            <div>
+                <label for="Male">M</label>
+                <input type="radio" name="gender" id="Male" Value="Male">
+                <label for="Female">F</label>
+                <input type="radio" name="gender" id="Female" Value="Female">
+            </div>
+        <div>
+            <label for="Postcode">Postcode primarily based in</label>
+            <input type="text" name = "Postcode" id ="Postcode" required>
+        </div>
+        <div>
+            <input type="checkbox" name="Willing" required>
+            <label for="Willing">I understand that all the property I post on ______ is in my possession and is abiding by ___________ terms and service. </label>
+        </div>
+
+        <button type="submit">Submit</button> 
+        <a href="/">Back</a>
 
     </form>
 </body>
