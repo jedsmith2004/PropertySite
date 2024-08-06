@@ -4,22 +4,40 @@ const app = express();
 
 const { readFile } = require('fs').promises;
 
-// app.get('/', (request, response) => {
-
-//     readFile('./home.html', 'utf8', (err, html) => {
-
-//         if (err) {
-//             response.status(500).send('sorry, out of luck buddy');
-//         }
-
-//         response.send(html);
-//     })
-// })
-
 app.get('/', async (request, response) => {
 
-    response.send( await readFile('./html', utf8) );
-    
+    response.send( await readFile('./index.html', 'utf8') );
+
+})
+
+app.get('/renter', async (request, response) => {
+
+    response.send( await readFile('./renter.html', 'utf8') );
+
+})
+
+app.get('/landlord', async (request, response) => {
+
+    response.send( await readFile('./landlord.html', 'utf8') );
+
+})
+
+app.get('/signup', async (request, response) => {
+
+    response.send( await readFile('./signup.html', 'utf8') );
+
+})
+
+app.get('/renterSignup', async (request, response) => {
+
+    response.send( await readFile('./renterSignup.html', 'utf8') );
+
+})
+
+app.get('/landlordSignup', async (request, response) => {
+
+    response.send( await readFile('./landlordSignup.html', 'utf8') );
+
 })
 
 app.listen(process.env.PORT || 3000, () => console.log('App available on http://localhost:3000'));
