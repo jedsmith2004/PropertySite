@@ -7,5 +7,47 @@
 </head>
 <body>
     <h1>Renter!</h1>
+    <div>
+        <label for="location">Postcode of area</label>
+        <input type="text" name="location" id="location">
+    </div>
+    <div>
+        <label for="range">Range</label>
+        <input type="range" name="range" id="range" value="50" oninput="rangeValue.innerText = this.value">
+        <label for="range">Less than</label>
+        <label for="range" id="rangeValue">50</label>
+        <label for="range">Miles</label>
+    </div>
+    <div>
+        <label for="beds">Beds</label>
+        <input type="range" name="beds" id="beds" min="1" max="10" value="1" oninput="bedsValue.innerText = this.value">
+        <label for="beds" id="bedsValue">1</label>
+    </div>
+    <div>
+        <label for="minCost">Min cost</label>
+        <input type="range" name="minCost" id="minCost" min="1" max="100000" value="50000" oninput="minCostValue.innerText = this.value">
+        <label for="minCost" id="minCostValue">50000</label>
+    </div>
+    <div>
+        <label for="maxCost">Max cost</label>
+        <input type="range" name="maxCost" id="maxCost" min="1" max="100000" value="50000" oninput="maxCostValue.innerText = this.value">
+        <label for="maxCost" id="maxCostValue">50000</label>
+    </div>
+    <div>
+        <label for="utilities">Utilities Included</label>
+        <input type="checkbox" name="utilities" id="utilities">
+    </div>
+    <div>
+        <label for="pets">Pets</label>
+        <input type="checkbox" name="pets" id="pets">
+    </div>
+    <div>
+        <label for="children">Children</label>
+        <input type="checkbox" name="children" id="children">
+    </div>
+    <div>
+        <label for="smoker">Smoking</label>
+        <input type="checkbox" name="smoker" id="smoker">
+    </div>
 </body>
 </html>
