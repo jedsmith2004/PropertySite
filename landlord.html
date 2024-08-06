@@ -7,5 +7,50 @@
 </head>
 <body>
     <h1>Landys</h1>
+    <form action="" methods="GET">
+        <div>
+            <label for="location">Postcode of your property</label>
+            <input type="text" name="location" id="location">
+        </div>
+        <div>
+            <label for="range">Range</label>
+            <input type="range" name="range" id="range" value="50" oninput="rangeValue.innerText = this.value">
+            <label for="range">Less than</label>
+            <label for="range" id="rangeValue">50</label>
+            <label for="range">Miles</label>
+        </div>
+        <div>
+            <label for="minAge">Min Age</label>
+            <input type="range" name="minAge" id="minAge" min="18" max="100" value="25" oninput="minAgeValue.innerText = this.value">
+            <label for="minAge" id="minAgeValue">25</label>
+        </div>
+        <div>
+            <label for="maxAge">Max Age</label>
+            <input type="range" name="maxAge" id="maxAge" min="18" max="100" value="25" oninput="maxAgeValue.innerText = this.value">
+            <label for="maxAge" id="maxAgeValue">25</label>
+        </div>
+        <div>
+            <label for="pets">No Pets</label>
+            <input type="checkbox" name="pets" id="pets">
+        </div>
+        <div>
+            <label for="children">No Children</label>
+            <input type="checkbox" name="children" id="children">
+        </div>
+        <div>
+            <label for="smoker">No Smoking</label>
+            <input type="checkbox" name="smoker" id="smoker">
+        </div>
+        <div>
+            <label for="tennents">Max number of tennents</label>
+            <input type="range" name="tennents" id="tennents" min="1" max="10" value="5" oninput="tennentsValue.innerText = this.value">
+            <label for="tennents" id="tennentsValue">5</label>
+        </div>
+        <div>
+            <label for="income">Min income</label>
+            <input type="range" name="income" id="income" min="1" max="100000" value="5" oninput="incomeValue.innerText = this.value">
+            <label for="income" id="incomeValue">25000</label>
+        </div>
+    </form>
 </body>
 </html>
