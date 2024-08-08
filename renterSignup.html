@@ -7,23 +7,23 @@
 </head>
 <body>
     <h1>Sign up and find your forever home!</h1>
-    <form action="....." methods="GET">
+    <form action="/tenant" method="POST">
         <div>
-            <label for="Name">Name</label>
-            <input type="text" name = "Name" id ="Name" placeholder="Full Name" required>
+            <label for="name">Name</label>
+            <input type="text" name = "name" id ="name" placeholder="Full Name" required>
         </div> 
         <div>
-            <label for="Number">Phone number</label>
-            <input type="text" name = "Number" id ="Number" required>
+            <label for="phone_number">Phone number</label>
+            <input type="text" name = "phone_number" id ="phone_number" required>
         </div> 
         <div>
-            <label for="Email">Email</label>
-            <input type="email" name = "Email" id ="Email" placeholder="Exmaple@gmail.com" required>
+            <label for="email">Email</label>
+            <input type="email" name = "email" id ="email" placeholder="Exmaple@gmail.com" required>
         </div> 
 
         <div>
-            <label for="Password">Password</label>
-            <input type="password" name = "Password" id ="Password" placeholder="Password" required>
+            <label for="password">Password</label>
+            <input type="password" name = "password" id ="password" placeholder="Password" required>
         </div> 
         <div>
             Gender
@@ -34,8 +34,8 @@
                 <input type="radio" name="gender" id="Female" Value="Female">
             </div>
         <div>
-            <label for="Postcode">Desired Postcode</label>
-            <input type="text" name = "Postcode" id ="Postcode" required>
+            <label for="postcode">Desired Postcode</label>
+            <input type="text" name = "postcode" id ="postcode" required>
         </div>
         <h2>Life Style Questions</h2>
         <p>Some Landlords require tenents to live certain lifestyles to providing residence. Please answer Truthfully and to the best of your ability so we can find your perfect landlord match!</p>
@@ -45,16 +45,16 @@
             <input type="checkbox" name="smoker" id="smoker" Value="smoker">
         </div>
         <div>
-            <label for="pets">Number of pets</label>
-            <input type="Number" name="pets" id="pets" Value="pets" min="0"required>
+            <label for="number_of_pets">Number of pets</label>
+            <input type="Number" name="number_of_pets" id="number_of_pets" Value="0" min="0"required>
         </div>
         <div>
-            <label for="kids">Number of children</label>
-            <input type="Number" name="kids" id="kids" Value="kids" min="0" required>
+            <label for="number_of_children">Number of children</label>
+            <input type="Number" name="number_of_children" id="number_of_children" Value="0" min="0" required>
         </div>
         <div>
-            <label for="people">Number of people in household</label>
-            <input type="Number" name="people" id="people" Value="people" min="0"required>
+            <label for="number_of_people">Number of people in household</label>
+            <input type="Number" name="number_of_people" id="number_of_people" Value="0" min="0"required>
         </div>
         <div>
             <label for="income">Household income</label>
