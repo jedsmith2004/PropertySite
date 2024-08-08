@@ -19,37 +19,37 @@ app.use(bodyParser.urlencoded({ extended: false }));
 
 app.get('/', async (request, response) => {
 
-    response.send( await readFile('./index.html', 'utf8') );
+    response.send( await readFile('./src/index.html', 'utf8') );
 
 })
 
 app.get('/renter', async (request, response) => {
 
-    response.send( await readFile('./renter.html', 'utf8') );
+    response.send( await readFile('./src/static/renter.html', 'utf8') );
 
 })
 
 app.get('/landlord', async (request, response) => {
 
-    response.send( await readFile('./landlord.html', 'utf8') );
+    response.send( await readFile('./src/static/landlord.html', 'utf8') );
 
 })
 
 app.get('/signup', async (request, response) => {
 
-    response.send( await readFile('./signup.html', 'utf8') );
+    response.send( await readFile('./src/static/signup.html', 'utf8') );
 
 })
 
 app.get('/renterSignup', async (request, response) => {
 
-    response.send( await readFile('./renterSignup.html', 'utf8') );
+    response.send( await readFile('./src/static/renterSignup.html', 'utf8') );
 
 })
 
 app.get('/landlordSignup', async (request, response) => {
 
-    response.send( await readFile('./landlordSignup.html', 'utf8') );
+    response.send( await readFile('./src/static/landlordSignup.html', 'utf8') );
 
 })
 
@@ -65,6 +65,28 @@ app.post('/tenant', (req, res) => {
     `;
   
     const params = [email, phone_number, password, gender, smokerValue, number_of_pets, number_of_children, number_of_people, income];
+  
+    db.run(sql, params, function(err) {
+      if (err) {
+        console.error('Error inserting data', err.message);
+        res.status(500).send('Error inserting data into the database.');
+        return;
+      }
+      console.log(`A row has been inserted with rowid ${this.lastID}`);
+      res.redirect('/');
+    });
+  });
+
+  app.post('/landlord_signup', (req, res) => {
+    const { name, email, number, password, gender} = req.body;
+  
+    // SQL query to insert data into tennents table
+    const sql = `
+      INSERT INTO landlords (email, number, password, gender, name)
+      VALUES (?, ?, ?, ?, ?)
+    `;
+  
+    const params = [email, number, password, gender, name];
   
     db.run(sql, params, function(err) {
       if (err) {

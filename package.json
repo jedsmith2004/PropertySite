@@ -2,5 +2,11 @@
   "dependencies": {
     "express": "^4.19.2",
     "sqlite3": "^5.1.7"
+  },
+  "devDependencies": {
+    "tailwindcss": "^3.4.9"
+  },
+  "scripts": {
+    "build:css": "npx tailwindcss -i ./src/styles/style.css -o ./dist/styles.css --watch"
   }
 }

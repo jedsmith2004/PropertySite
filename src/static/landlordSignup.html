@@ -7,23 +7,23 @@
 </head>
 <body>
     <h1>Sign up as a landlord!</h1>
-    <form action="....." methods="GET">
+    <form action="/landlord_signup" method="POST">
         <div>
-            <label for="Name">Name</label>
-            <input type="text" name = "Name" id ="Name" placeholder="Full Name" required>
+            <label for="name">Name</label>
+            <input type="text" name = "name" id ="name" placeholder="Full Name" required>
         </div> 
         <div>
-            <label for="Number">Phone number</label>
-            <input type="text" name = "Number" id ="Number" required>
+            <label for="number">Phone number</label>
+            <input type="text" name = "number" id ="number" required>
         </div> 
         <div>
-            <label for="Email">Email</label>
-            <input type="email" name = "Email" id ="Email" placeholder="Exmaple@gmail.com" required>
+            <label for="email">Email</label>
+            <input type="email" name = "email" id ="email" placeholder="Exmaple@gmail.com" required>
         </div> 
 
         <div>
-            <label for="Password">Password</label>
-            <input type="password" name = "Password" id ="Password" placeholder="Password" required>
+            <label for="password">Password</label>
+            <input type="password" name = "password" id ="password" placeholder="Password" required>
         </div> 
         <div>
             Gender
@@ -33,10 +33,7 @@
                 <label for="Female">F</label>
                 <input type="radio" name="gender" id="Female" Value="Female">
             </div>
-        <div>
-            <label for="Postcode">Postcode primarily based in</label>
-            <input type="text" name = "Postcode" id ="Postcode" required>
-        </div>
+
         <div>
             <input type="checkbox" name="Willing" required>
             <label for="Willing">I understand that all the property I post on ______ is in my possession and is abiding by ___________ terms and service. </label>
