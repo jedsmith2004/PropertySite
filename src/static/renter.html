@@ -3,51 +3,84 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Property Search</title>
 </head>
 <body>
     <h1>Renter!</h1>
-    <div>
-        <label for="location">Postcode of area</label>
-        <input type="text" name="location" id="location">
-    </div>
-    <div>
-        <label for="range">Range</label>
-        <input type="range" name="range" id="range" value="50" oninput="rangeValue.innerText = this.value">
-        <label for="range">Less than</label>
-        <label for="range" id="rangeValue">50</label>
-        <label for="range">Miles</label>
-    </div>
-    <div>
-        <label for="beds">Beds</label>
-        <input type="range" name="beds" id="beds" min="1" max="10" value="1" oninput="bedsValue.innerText = this.value">
-        <label for="beds" id="bedsValue">1</label>
-    </div>
-    <div>
-        <label for="minCost">Min cost</label>
-        <input type="range" name="minCost" id="minCost" min="1" max="100000" value="50000" oninput="minCostValue.innerText = this.value">
-        <label for="minCost" id="minCostValue">50000</label>
-    </div>
-    <div>
-        <label for="maxCost">Max cost</label>
-        <input type="range" name="maxCost" id="maxCost" min="1" max="100000" value="50000" oninput="maxCostValue.innerText = this.value">
-        <label for="maxCost" id="maxCostValue">50000</label>
-    </div>
-    <div>
-        <label for="utilities">Utilities Included</label>
-        <input type="checkbox" name="utilities" id="utilities">
-    </div>
-    <div>
-        <label for="pets">Pets</label>
-        <input type="checkbox" name="pets" id="pets">
-    </div>
-    <div>
-        <label for="children">Children</label>
-        <input type="checkbox" name="children" id="children">
-    </div>
-    <div>
-        <label for="smoker">Smoking</label>
-        <input type="checkbox" name="smoker" id="smoker">
-    </div>
+    <form action="/property_search" method="POST">
+        <div>
+            <label for="postcode">Postcode of area</label>
+            <input type="text" name="postcode" id="postcode">
+        </div>
+        <div>
+            <label for="range">Range</label>
+            <input type="range" name="range" id="range" value="50" oninput="document.getElementById('rangeValue').innerText = this.value">
+            <label for="range">Less than</label>
+            <label id="rangeValue">50</label>
+            <label for="range">Miles</label>
+        </div>
+        <div>
+            <label for="beds">Beds</label>
+            <input type="range" name="beds" id="beds" min="1" max="10" value="1" oninput="document.getElementById('bedsValue').innerText = this.value">
+            <label id="bedsValue">1</label>
+        </div>
+        <div>
+            <label for="bathrooms">Bathrooms</label>
+            <input type="range" name="bathrooms" id="bathrooms" min="1" max="10" value="1" oninput="document.getElementById('bathroomsValue').innerText = this.value">
+            <label id="bathroomsValue">1</label>
+        </div>
+        <div class="input-group">
+            <label for="Min_cost">Min rent monthly: </label>
+            <input type="range" name="Min_cost" id="Min_cost" min="1" max="5000" value="500" oninput="syncMinCostInputs(this.value)">
+            <input type="number" id="minCostInput" min="1" max="5000" value="500" oninput="syncMinCostInputs(this.value)">
+        </div>
+    
+        <script>
+            const minRangeInput = document.getElementById('Min_cost');
+            const minNumberInput = document.getElementById('minCostInput');
+            const minCostValueLabel = document.getElementById('minCostValue');
+    
+            function syncMinCostInputs(value) {
+                minRangeInput.value = value;
+                minNumberInput.value = value;
+                minCostValueLabel.innerText = value;
+            }
+        </script>
+        <div class="input-group">
+            <label for="max_cost">Max rent monthly: </label>
+            <input type="range" name="max_cost" id="max_cost" min="1" max="5000" value="500" oninput="syncMaxCostInputs(this.value)">
+            <input type="number" id="maxCostInput" min="1" max="5000" value="500" oninput="syncMaxCostInputs(this.value)">
+        </div>
+    
+        <script>
+            const maxRangeInput = document.getElementById('max_cost');
+            const maxNumberInput = document.getElementById('maxCostInput');
+            const maxCostValueLabel = document.getElementById('maxCostValue');
+    
+            function syncMaxCostInputs(value) {
+                maxRangeInput.value = value;
+                maxNumberInput.value = value;
+                maxCostValueLabel.innerText = value;
+            }
+        </script>
+        <div>
+            <label for="utilities">Utilities Included</label>
+            <input type="checkbox" name="utilities" id="utilities">
+        </div>
+        <div>
+            <label for="pet_allowed">Pets</label>
+            <input type="checkbox" name="pet_allowed" id="pet_allowed">
+        </div>
+        <div>
+            <label for="children_allowed">Children</label>
+            <input type="checkbox" name="children_allowed" id="children_allowed">
+        </div>
+        <div>
+            <label for="smoker_allowed">Smoking</label>
+            <input type="checkbox" name="smoker_allowed" id="smoker_allowed">
+        </div>
+        <button type="submit">Search</button>
+        <a href="/">Back</a>
+    </form>
 </body>
 </html>

@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Listings</h1>
+    <p>Create a listing for your property easily and quickly!</p>
+    <form action="/listing_data" method="POST">
+        <div>
+            <label for="email">Email</label>
+            <input type="text" name="email" id="email" required>
+        </div>
+        <div>
+            <label for="postcode">Postcode of your property</label>
+            <input type="text" name="postcode" id="postcode">
+        </div>
+        <div>
+            <label for="beds">Amount of bedrooms</label>
+            <input type="number" name="beds" id="beds" value="0">
+        </div>
+        <div>
+            <label for="bathrooms">Amount of bathrooms</label>
+            <input type="number" name="bathrooms" id="bathrooms" value="0">
+        </div>
+
+        <div>
+            <label for="smoker_allowed">No smoking Allowed?</label>
+            <input type="checkbox" name="smoker_allowed" id="smoker_allowed">
+        </div>
+        <div>
+            <label for="children_allowed">No Children Allowed?</label>
+            <input type="checkbox" name="children_allowed" id="children_allowed">
+        </div>
+        <div>
+            <label for="pet_allowed">No pets Allowed?</label>
+            <input type="checkbox" name="pet_allowed" id="pet_allowed">
+        </div>
+        <div>
+            <label for="utilities">Utilities included?</label>
+            <input type="checkbox" name="utilities" id="utilities">
+        </div>
+        <div class="input-group">
+            <label for="cost">Rent per month: </label>
+            <input type="range" name="cost" id="cost" min="1" max="4000" value="500" oninput="syncInputs(this.value)">
+            <input type="number" id="costInput" min="1" max="4000" value="500" oninput="syncInputs(this.value)">
+        </div>
+        
+        <script>
+            const rangeInput = document.getElementById('cost');
+            const numberInput = document.getElementById('costInput');
+            const incomeValueLabel = document.getElementById('incomeValue');
+        
+            function syncInputs(value) {
+                rangeInput.value = value;
+                numberInput.value = value;
+                incomeValueLabel.innerText = value;
+            }
+            </script>
+        <div>
+            <input type="submit">
+            <a href="\">back</a>
+        </div>
+    </form>
+</body>
+</html>

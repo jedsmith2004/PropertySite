@@ -7,7 +7,7 @@ const { readFile } = require('fs').promises;
 const bodyParser = require('body-parser');
 const sqlite3 = require("sqlite3").verbose();
 
-const db = new sqlite3.Database('./testing.db', (err) => {
+const db = new sqlite3.Database('./db/testing.db', (err) => {
     if (err) {
       console.error('Could not open database', err.message);
       process.exit(1);
@@ -47,6 +47,13 @@ app.get('/renterSignup', async (request, response) => {
 
 })
 
+
+app.get('/listingform', async (request, response) => {
+
+    response.send( await readFile('./src/static/listingform.html', 'utf8') );
+
+})
+
 app.get('/landlordSignup', async (request, response) => {
 
     response.send( await readFile('./src/static/landlordSignup.html', 'utf8') );
@@ -76,17 +83,39 @@ app.post('/tenant', (req, res) => {
       res.redirect('/');
     });
   });
+  
+    app.post('/landlord_signup', (req, res) => {
+      const { name, email, number, password, gender} = req.body;
+    
+      // SQL query to insert data into tennents table
+      const sql = `
+        INSERT INTO landlords (email, number, password, gender, name)
+        VALUES (?, ?, ?, ?, ?)
+      `;
+    
+      const params = [email, number, password, gender, name];
+    
+      db.run(sql, params, function(err) {
+        if (err) {
+          console.error('Error inserting data', err.message);
+          res.status(500).send('Error inserting data into the database.');
+          return;
+        }
+        console.log(`A row has been inserted with rowid ${this.lastID}`);
+        res.redirect('/');
+      });
+  });
 
-  app.post('/landlord_signup', (req, res) => {
-    const { name, email, number, password, gender} = req.body;
+  app.post('/listing_data', (req, res) => {
+    const {listing_id, postcode, email, beds, bathrooms, smoker_allowed, children_allowed, pet_allowed, cost} = req.body;
   
     // SQL query to insert data into tennents table
     const sql = `
-      INSERT INTO landlords (email, number, password, gender, name)
-      VALUES (?, ?, ?, ?, ?)
+      INSERT INTO listings (listing_id, postcode, email, beds, bathrooms, smoker_allowed, children_allowed, pet_allowed, cost)
+      VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
     `;
   
-    const params = [email, number, password, gender, name];
+    const params = [listing_id, postcode, email, beds, bathrooms, smoker_allowed, children_allowed, pet_allowed, cost];
   
     db.run(sql, params, function(err) {
       if (err) {
@@ -98,9 +127,74 @@ app.post('/tenant', (req, res) => {
       res.redirect('/');
     });
   });
+    
+    
+
+    app.post('/property_search', (req, res) => {
+        const {
+            postcode,
+            range,
+            beds,
+            Min_cost,
+            max_cost,
+            utilities,
+            pet_allowed,
+            children_allowed,
+            smoker_allowed
+        } = req.body;
+    
+        let sql = `SELECT * FROM listings WHERE 1=1`; // Adding `WHERE 1=1` allows for easy appending of conditions
+        let params = [];
+        
+        // Dynamically build SQL query and parameters
+        if (postcode) {
+            sql += ` AND postcode LIKE ?`;
+            params.push(`%${postcode}%`);
+        }
+        if (Min_cost || Min_cost === 0) {
+            sql += ` AND cost >= ?`;
+            params.push(Min_cost);
+        }
+        if (max_cost || max_cost === 5000) {
+            sql += ` AND cost <= ?`;
+            params.push(max_cost);
+        }
+        if (beds || beds === 1) {
+            sql += ` AND beds = ?`;
+            params.push(beds);
+        }
+        if (req.body.bathrooms || req.body.bathrooms === 1) {
+            sql += ` AND bathrooms = ?`;
+            params.push(req.body.bathrooms);
+        }
+        if (utilities) {
+            sql += ` AND utilities = 1`;
+        }
+        if (pet_allowed) {
+            sql += ` AND pets_allowed = 1`;
+        }
+        if (children_allowed) {
+            sql += ` AND children_allowed = 1`;
+        }
+        if (smoker_allowed) {
+            sql += ` AND smoking_allowed = 1`;
+        }
+        
+        // Execute the SQL query
+        db.all(sql, params, (err, rows) => {
+            if (err) {
+                console.error('Error executing search query:', err.message);
+                return res.status(500).send('Error 505 no collum. Return to homepage');
+            }
+            res.json(rows); // Or render a view with results
+        });
+  });
+
+
+
 
 app.listen(process.env.PORT || 3000, () => console.log('App available on http://localhost:3000'));
 
 // db.close((err) => {
 //     if (err) return console.error(err.message);
-// });
+// })
