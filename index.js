@@ -47,6 +47,22 @@ app.get('/renterSignup', async (request, response) => {
     response.send( await readFile('./src/static/renterSignup.html', 'utf8') );
 
 })
+app.get('/landlordsignin', async (request, response) => {
+
+  response.send( await readFile('./src/static/landlordsignin.html', 'utf8') );
+
+})
+app.get('/rentersignin', async (request, response) => {
+
+  response.send( await readFile('./src/static/renterssignin.html', 'utf8') );
+
+})
+
+app.get('/signinpage', async (request, response) => {
+
+    response.send( await readFile('./src/static/signinpage.html', 'utf8') );
+
+})
 
 
 app.get('/listingform', async (request, response) => {
@@ -189,7 +205,62 @@ app.post('/tenant', (req, res) => {
             }
             res.json(rows); // Or render a view with results
         });
+      });
+        // Define routes
+app.get('/', (req, res) => {
+  res.sendFile(path.join(__dirname, 'public', 'login.html'));
+});
+
+app.post('/landlord_signin', (req, res) => {
+  const { email, password } = req.body;
+
+  // SQL query to select the password for the given email
+  const sql = 'SELECT password FROM landlords WHERE email = ?';
+  db.get(sql, [email], (err, row) => {
+      if (err) {
+          console.error('Error executing the query:', err.message);
+          return res.status(500).send('Internal server error.');
+      }
+
+      if (!row) {
+          // If user is not found, send an unauthorized response
+          return res.status(401).send('Invalid email or password.');
+      }
+
+      if (row.password === password) {
+          // If the password matches, send a success response
+          return res.send('Login successful!');
+      } else {
+          // If the password does not match, send an unauthorized response
+          return res.status(401).send('Invalid email or password.');
+      }
   });
+});
+  app.post('/renter_signin', (req, res) => {
+    const { email, password } = req.body;
+  
+    // SQL query to select the password for the given email
+    const sql = 'SELECT password FROM tennents WHERE email = ?';
+    db.get(sql, [email], (err, row) => {
+        if (err) {
+            console.error('Error executing the query:', err.message);
+            return res.status(500).send('Internal server error.');
+        }
+  
+        if (!row) {
+            // If user is not found, send an unauthorized response
+            return res.status(401).send('Invalid email or password.');
+        }
+  
+        if (row.password === password) {
+            // If the password matches, send a success response
+            return res.send('Login successful!');
+        } else {
+            // If the password does not match, send an unauthorized response
+            return res.status(401).send('Invalid email or password.');
+        }
+    });
+});
 
 
 
