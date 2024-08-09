@@ -130,4 +130,4 @@ dist
 .pnp.*
 
 # Add the following line
-db/testing.db
+# db/testing.db
