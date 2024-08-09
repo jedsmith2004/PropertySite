@@ -16,6 +16,7 @@ const db = new sqlite3.Database('./testing.db', (err) => {
   });
 
 app.use(bodyParser.urlencoded({ extended: false }));
+app.use(express.static('.'));
 
 app.get('/', async (request, response) => {
 
